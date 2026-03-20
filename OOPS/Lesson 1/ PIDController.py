@@ -15,7 +15,7 @@ class PIDController:
     
 
 
-pid = PIDController(kp=1.0, ki=0.1, kd=0.05)
+pid = PIDController(kp=2.0, ki=0.1, kd=0.05)
 error = 10.0  # Example error
 dt = 0.1      # Time step
 control_signal = pid.compute(error, dt)
