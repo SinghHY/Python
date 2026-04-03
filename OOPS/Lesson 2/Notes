@@ -1,0 +1,48 @@
+"""Bad design (storing derived value)
+class MassSpringSystem:
+    def __init__(self, mass: float, stiffness: float) -> None:
+        self.mass = mass
+        self.stiffness = stiffness
+        self.natural_frequency = (stiffness / mass) ** 0.5
+Problem
+
+Now imagine:
+
+system = MassSpringSystem(2.0, 50.0)
+system.mass = 5.0
+
+What is natural_frequency now?
+
+👉 It is WRONG (stale value)
+
+You forgot to update it.
+
+❌ Hidden bug
+
+This is called state inconsistency:
+
+mass changed
+natural_frequency did NOT update
+
+These bugs are:
+
+hard to detect
+common in simulations
+dangerous in engineering calculations
+✅ Good design (compute when needed)
+class MassSpringSystem:
+    def __init__(self, mass: float, stiffness: float) -> None:
+        self.mass = mass
+        self.stiffness = stiffness
+
+    def natural_frequency(self) -> float:
+        return (self.stiffness / self.mass) ** 0.5
+
+Now:
+
+system.mass = 5.0
+print(system.natural_frequency())  # always correct
+
+✔ Always consistent
+✔ No hidden bugs
+✔ No duplicate state"""
